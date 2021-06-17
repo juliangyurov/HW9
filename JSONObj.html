@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Object from JSON String</h2>
+<div id = "startid">
+    <p id="user"></p>
+    <p id="listname"></p>
+
+    <!-- here list items will be added programaticaly-->
+</div>
+
+<script>
+    var fname,lname,checked,listname;
+var text = '{"employees":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"Anna","lastName":"Smith" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+
+var text = '{ "accounts": ['+
+                            '{"firstName":"John",'+
+                            '"lastName":"Doe",'+
+                            '"email":"john.d@example.org",'+
+                            '"password":"1234567890ABCD" ,'+ 
+                            '"todolists":['+ 
+                                            '{ "listname" : "grocerylist", "items":   ['+ 
+                                                                                '{"el": "Bakery and Bread", "checked":false},'+
+                                                                                '{"el": "Meat and Seafood", "checked":false},'+
+                                                                                '{"el": "Pasta and Rice", "checked":false},'+
+                                                                                '{"el": "Dairy, Cheese, and Eggs", "checked":false}'+
+                                                                                   ' ] '+   
+                                            '},'+
+
+                                            '{ "listname" : "apparellist", "items":   ['+ 
+                                                                                '{"el": "sweater", "checked":false},'+
+                                                                                '{"el": "jacket", "checked":false},'+
+                                                                                '{"el": "jeans", "checked":false},'+
+                                                                                '{"el": "socks", "checked":false}'+
+                                                                                    ']  '+   
+                                            '}'+                                                                                
+                                        '] '+
+                            '},'+
+
+
+                            '{ "firstName":"Anna",'+
+                            '"lastName":"Smith",'+
+                            '"email":"anna.s@example.org",'+
+                            '"password":"1234567890ABCD" ,'+ 
+                            '"todolists" : ['+ 
+                                        '{ "listname" : "activitylist", "items": ['+ 
+                                                                                '{"el": "Hit the gym", "checked":false },'+
+                                                                                '{"el": "Pay bills", "checked":false },'+
+                                                                                '{"el": "Meet George", "checked":false },'+
+                                                                                '{"el": "Organize office", "checked":false }'+
+                                                                                ']    },'+
+                                        '{ "listname" : "stopdoinglist", "items": ['+ 
+                                                                                '{"el": "overbooking myself", "checked":false },'+
+                                                                                '{"el": "criticizing and judging myself", "checked":false },'+
+                                                                                '{"el": "participating in drama", "checked":false },'+
+                                                                                '{"el": "expecting too much of myself", "checked":false }'+
+                                                                                ']     }'+                                                                                
+                                         ']},'+
+                        
+                        
+                            '{"firstName":"Peter",'+
+                            '"lastName":"Jones",'+
+                            '"email":"peter.j@example.org",'+
+                            '"password":"1234567890ABCD" ,'+ 
+                            '"todolists" : ['+ 
+                                        '{ "listname" : "stopdoinglist", "items": ['+ 
+                                                                                '{"el": "waiting for permission", "checked":false },'+
+                                                                                '{"el": "seeking approval", "checked":false },'+
+                                                                                '{"el": "avoiding the truth", "checked":false },'+
+                                                                                '{"el": "rescuing other people", "checked":false }'+
+                                                                                ']    },'+
+                                        '{ "listname" : "developerlist", "items": ['+ 
+                                                                                '{"el": "develop a new feature", "checked":false },'+
+                                                                                '{"el": "analyze the survay results", "checked":false },'+
+                                                                                '{"el": "publish an article on google", "checked":false },'+
+                                                                                '{"el": "learn to use sketch", "checked":false }'+
+                                                                                ']     }'+                                                                                
+                                         ']}'+
+                            '] }';
+
+objs = JSON.parse(text);
+console.log(objs);
+
+fname = objs.accounts[1].firstName;
+lname =  objs.accounts[1].lastName;
+listname = objs.accounts[1].todolists[1].listname;
+//item = objs.accounts[1].todolists[1].items[3];
+//checked = (item.checked)?"status: done":"status: pending";
+document.getElementById("user").innerHTML = fname + " " + lname ;
+document.getElementById("listname").innerHTML = listname ;
+
+for(var i=0; i < objs.accounts[1].todolists[1].items.length ; i++ ){
+    var item = objs.accounts[1].todolists[1].items[i];
+    var checked = (item.checked)?"status: done":"status: pending";
+    //document.getElementById("element"+i).innerHTML =  item.el + "; " + checked;
+
+    // add p html element
+    var tag = document.createElement("p");
+    var text = document.createTextNode((i+1) + ". " + item.el + "; " + checked);
+    tag.appendChild(text);
+    var pelement = document.getElementById("startid");
+    pelement.appendChild(tag);
+};
+
+function getUserByEmail(email){
+    for(var i = 0; i < objs.accounts.length; i++){
+        if(email === objs.accounts[i].email){
+            return i;
+        };
+    };
+    return -1;
+
+};
+
+function getListsByUser(user){
+    var listnames = [];
+    for(var i = 0; i < objs.accounts[user].todolists.length; i++){
+        listnames.push(objs.accounts[user].todolists[i].listname) ;
+    };
+    return listnames;
+
+};
+
+function getListByUserListIx(user,listIx){
+    return objs.accounts[user].todolists[listIx].items;
+
+};
+
+function addUser(fname,lname,email,password){
+    // Check if user already created
+    if(getUser(email) !== -1) {
+        return -1;
+    };
+    const objUser = {
+                        "firstName": fname ,
+                        "lastName": lname ,
+                        "password": password ,
+                        "todolists": [] 
+                    };
+    try{
+        localStorage.setItem(email,JSON.stringify(objUser));
+    }catch(e){
+        console.error(e);
+    };
+    
+};
+
+function getUser(email){
+    try{
+        var objUser = localStorage.getItem(email);
+        if(objUser === null){
+            return -1;
+        };
+        objUser = JSON.parse(objUser);
+        return objUser;
+    }catch(e){
+        console.error(e);
+    };
+};
+
+console.log("Add user: " + "john.d@example.org ");
+addUser("John","Doe","john.d@example.org","johnd1234567890ABCD");
+console.log(getUser("johnd@example.org"));
+
+
+
+
+
+// console.log("For " + "yg.atanasoff@gmail.com infex = " + getUserByEmail("yg.atanasoff@gmail.com"));
+
+// console.log("For " + "john.d@example.org infex = " + getUserByEmail("john.d@example.org"));
+// console.log("Listnames: " + getListsByUser(getUserByEmail("john.d@example.org")));
+// console.log(getListByUserListIx(getUserByEmail("john.d@example.org"),0));
+
+// console.log("For " + "anna.s@example.org infex = " + getUserByEmail("anna.s@example.org"));
+// console.log("Listnames: " + getListsByUser(getUserByEmail("anna.s@example.org")));
+
+// console.log("For " + "peter.j@example.org infex = " + getUserByEmail("peter.j@example.org"));
+// console.log("Listnames: " + getListsByUser(getUserByEmail("peter.j@example.org")));
+
+
+</script>
+
+</body>
+</html>
