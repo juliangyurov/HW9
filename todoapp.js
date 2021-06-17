@@ -142,7 +142,7 @@ function createHtml(stage){
         `);
     }else if(stage === 3){  //  3 - dashboard
         mainHtml = (`
-            <div id="dashboard-form" style="display: none;">
+            <div id="dashboard-form" style="display: block;">
                 <form >
                     <h2>DASHBOARD - Please choose existing or create new to-do list below:</h2>
                     <br>
@@ -166,7 +166,7 @@ function createHtml(stage){
         `);
     }else if(stage === 4){  //  4 - todolist
         mainHtml = (`
-            <div id="todo-form" style="display: none;">
+            <div id="todo-form" style="display: block;">
                 <form >
                     <h2>TO-DO List:</h2>
                     <br>
@@ -192,7 +192,7 @@ function createHtml(stage){
 
     }else{  //  5 - account settings
         mainHtml = (`
-            <div id="account-settings-form" style="display: none;">
+            <div id="account-settings-form" style="display: block;">
                 <form >
                     <h2 id="headerAccSettings">Account Settings:</h2>
                     <br>
@@ -734,6 +734,9 @@ function logOut(){
 
 function changeAccSettings(){
     // display/edit account settings
+    stage = 5;
+    console.log("stage = " + stageName[stage]);
+    createHtml(stage);     
     const asfname = document.getElementById("asfname");
     const aslname = document.getElementById("aslname");
     const asemail = document.getElementById("asemail");
@@ -744,9 +747,7 @@ function changeAccSettings(){
     asemail.value=luemail;
     aspassword.value="012345678912";        //dummy password
     asrepassword.value="012345678921"; 
-    stage = 5;
-    console.log("stage = " + stageName[stage]);
-    createHtml(stage);     
+
 }
 
 function AccSettingsSave(){
