@@ -3,6 +3,13 @@
 let stage = 0;
 let stageName = ["0 - firstform", "1 - signupform", "2 - loginform", "3 - dashboard", "4 - todolist", "5 - account settings"];
 
+// logged user data
+let lufname,lulname,luemail,lupassword;
+let lutodolists = []; 
+
+//back or savelist status for button on Todo form
+let backsavelist = true; // true -> back button , false -> savelist button
+
 // function changeStage()  {
 //     switch(stage){
 //         case 0:
@@ -64,6 +71,7 @@ let stageName = ["0 - firstform", "1 - signupform", "2 - loginform", "3 - dashbo
 //     console.log("stage = " + stageName[stage]);
 // }
 
+// Init
 createHtml(stage);
 
 function createHtml(stage){
@@ -223,7 +231,7 @@ function createHtml(stage){
     }
 
     document.getElementById("heading").innerHTML = headingHtml + mainHtml;
-    console.log(heading + mainHtml);
+    console.log(headingHtml + mainHtml);
 
     if(stage === 0){
         let buttonSignUp = document.getElementById("signup");
@@ -252,12 +260,13 @@ function createHtml(stage){
         let buttonAccSettings = document.getElementById("accSettingsBtn");
         let buttonLogOut = document.getElementById("logOutBtn");
         let buttonBackOrSaveList = document.getElementById("backsavelist");
+        buttonBackOrSaveList.addEventListener("click",backOrSaveTodoList); 
         toDoForm.addEventListener("click",toggleLiChecked,false);  
         editableListName.addEventListener("click",editTodoListName);      
         buttonNewListItem.addEventListener("click",newListItem);
         buttonAccSettings.addEventListener("click", changeAccSettings);
         buttonLogOut.addEventListener("click", logOut);  
-        buttonBackOrSaveList.addEventListener("click",backOrSaveTodoList);      
+             
     }else{
         let buttonAccSettingsSave = document.getElementById("accsettingssave");
         let buttonAccSettingsCancel = document.getElementById("accsettingscancel");
@@ -584,6 +593,10 @@ function displayTodoLists(UlId){
 }
 
 function displayTodoList(){
+    stage = 4;
+    console.log("stage = " + stageName[stage]);
+    createHtml(stage);
+
     const todoListULId = document.getElementById("todolistul");
 
     todoListULId.innerHTML = "";
@@ -602,14 +615,12 @@ function displayTodoList(){
         }    
     } 
 
+    document.getElementById("h3-listname").innerText=this.id;
+
     backsavelist = true; // Todo form button text -> back
     changeTodoFormButton(backsavelist);
     
-    document.getElementById("h3-listname").innerText=this.id;
-
-    stage = 4;
-    console.log("stage = " + stageName[stage]);
-    createHtml(stage);
+    
 }
 
 // not used in the moment
@@ -851,6 +862,7 @@ function backOrSaveTodoList(){
 }
 
 function changeTodoFormButton(backorsave){
+    let buttonBackOrSaveList = document.getElementById("backsavelist"); // buttonBackOrSaveList not defined
     let text = (backorsave)?"Back":"Save";
     buttonBackOrSaveList.innerText = text;
 }
@@ -922,12 +934,12 @@ function editTodoListName(ev){
 
 // init
 // show/hide form variables
-let firstForm = document.getElementById("first-form" );
-let signUpForm = document.getElementById("signup-form" );
-let logInForm = document.getElementById("login-form" );
-let dashboardForm = document.getElementById("dashboard-form" );
+// let firstForm = document.getElementById("first-form" );
+// let signUpForm = document.getElementById("signup-form" );
+// let logInForm = document.getElementById("login-form" );
+// let dashboardForm = document.getElementById("dashboard-form" );
 // let toDoForm = document.getElementById("todo-form" );
-let accSettingsForm = document.getElementById("account-settings-form" );
+// let accSettingsForm = document.getElementById("account-settings-form" );
 
 // button and other elements
 //let buttonSignUp = document.getElementById("signup");
@@ -967,11 +979,11 @@ let accSettingsForm = document.getElementById("account-settings-form" );
 // editableListName.addEventListener("click",editTodoListName);
 // buttonBackFromLogin.addEventListener("click",backFromLoginClicked);
 
-// logged user data
-let lufname,lulname,luemail,lupassword;
-let lutodolists = []; 
-//back or savelist status for button on Todo form
-let backsavelist = true; // true -> back button , false -> savelist button
+// // logged user data
+// let lufname,lulname,luemail,lupassword;
+// let lutodolists = []; 
+// //back or savelist status for button on Todo form
+// let backsavelist = true; // true -> back button , false -> savelist button
 
 // remove users
 //removeUser("emarinova@gmail.com");
