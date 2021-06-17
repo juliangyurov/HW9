@@ -17,7 +17,7 @@ Extra Credit:
 In addition to template-izing the <body> see if you can do so for the some of the <head> tags like the <title> and various pieces of meta data.
 
 
-
+<br>
 Project #1
 
 
