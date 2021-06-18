@@ -1,7 +1,8 @@
 //unprotected
 // stage = 0 - firstform, 1 - signupform, 2 - loginform, 3 - dashboard, 4 - todolist, 5 - account settings
 let stage = 0;
-let stageName = ["0 - firstform", "1 - signupform", "2 - loginform", "3 - dashboard", "4 - todolist", "5 - account settings"];
+let stageName = ["0 - firstform", "1 - signupform", "2 - loginform", "3 - dashboard", 
+"4 - todolist", "5 - account settings"];
 
 // logged user data
 let lufname,lulname,luemail,lupassword;
@@ -11,8 +12,10 @@ let lutodolists = [];
 let backsavelist = true; // true -> back button , false -> savelist button
 
 // H2 - template literal variables 
-let varH2 = ["list of things that need to get done","Please complete all information below:","Please complete all information below:",
-"DASHBOARD - Please choose existing or create new to-do list below:","TO-DO List:","Account Settings:"];
+let varH2 = ["list of things that need to get done","Please complete all information below:",
+"Please complete all information below:",
+"DASHBOARD - Please choose existing or create new to-do list below:","TO-DO List:","Account Settings:",
+"My To Do Lists","Enter new list item ..."];
 
 // 0 - list of things that need to get done
 // 1,2 - Please complete all information below:
@@ -20,7 +23,10 @@ let varH2 = ["list of things that need to get done","Please complete all informa
 // 4 - TO-DO List:
 // 5 - Account Settings:
 
-let varASLabel = ["First name:","Last name:","Email:","Password:","ReEnter Password:"];
+let varASLabel = ["First name:","Last name:","Email:","Password:","ReEnter Password:",
+" I agree to the Terms of Use"];
+
+let varButton = ["Sign Up","Log In","Back","Add","Account Settings","Log Out","Save","Cancel"];
 
 // Init
 createHtml(stage);
@@ -41,10 +47,10 @@ function createHtml(stage){
         mainHtml = (`
             <div id="first-form" style="display: block;" >
                 <div>
-                    <button id="signup" type="button" class="button">Sign Up</button>
+                    <button id="signup" type="button" class="button">${varButton[0]}</button>
                 </div>
                 <div>
-                    <button id="login" type="button2" class="button">Log In</button>
+                    <button id="login" type="button2" class="button">${varButton[1]}</button>
                 </div>
             </div>
         `) ;
@@ -55,23 +61,23 @@ function createHtml(stage){
                     <h2 id="headerSignUp">${varH2[stage]}</h2>
                     <br>
 
-                    <label for="fname">First name:</label><br>              
+                    <label for="fname">${varASLabel[0]}</label><br>              
                     <input type="text" id="fname" name="fname" size="30"><br><br>
             
-                    <label for="lname">Last name:</label><br>
+                    <label for="lname">${varASLabel[1]}</label><br>
                     <input type="text" id="lname" name="lname" size="30"><br><br>
             
-                    <label for="email">Email:</label><br>                              
+                    <label for="email">${varASLabel[2]}</label><br>                              
                     <input type="text" id="email" name="email" size="30"><br><br>
             
-                    <label for="password">Password:</label><br>
+                    <label for="password">${varASLabel[3]}</label><br>
                     <input type="password" id="password" name="password" size="30"><br><br>
 
                     <input type="checkbox" id="agreement" name="agreement" value="ok">
-                    <label for="agreement" style="font-size: small;"> I agree to the Terms of Use</label><br><br>
+                    <label for="agreement" style="font-size: small;">${varASLabel[5]}</label><br><br>
             
                     <div>
-                        <button id="signupform" type="button" class="button">Sign Up</button>
+                        <button id="signupform" type="button" class="button">${varButton[0]}</button>
                     </div>
                 </form>
             </div>
@@ -84,17 +90,17 @@ function createHtml(stage){
                     <h2 id="headerLogin" >${varH2[stage]}</h2>
                     <br>
                     
-                    <label for="email1">Email:</label><br>                              
+                    <label for="email1">${varASLabel[2]}</label><br>                              
                     <input type="text" id="email1" name="email1" size="30"><br><br>
                     
-                    <label for="password1">Password:</label><br>
+                    <label for="password1">${varASLabel[3]}</label><br>
                     <input type="password" id="password1" name="password1" size="30"><br><br>
                     
                     <div>
-                        <button id="loginform" type="button" class="button">Log In</button>
+                        <button id="loginform" type="button" class="button">${varButton[1]}</button>
                     </div>
                     <div>
-                        <button id="backfromlogin" type="button" class="button">Back</button>
+                        <button id="backfromlogin" type="button" class="button">${varButton[2]}</button>
                     </div>
                 </form>
             </div>
@@ -107,11 +113,11 @@ function createHtml(stage){
                     <br>
 
                         <div id="myDIV" class="header-dash">
-                            <h3 style="margin:5px">My To Do Lists</h3>
-                            <input class="input-dash" type="text" id="newListNameInput" placeholder="Enter new list name ...">
-                            <span id="newtodolist" class="addBtn">Add</span>
-                            <span id="accSettingsBtn" class="accSettingsBtn">Account Settings</span>
-                            <span id="logOutBtn" class="logOutBtn">Log Out</span>
+                            <h3 style="margin:5px">${varH2[6]}</h3>
+                            <input class="input-dash" type="text" id="newListNameInput" placeholder="${varH2[7]}">
+                            <span id="newtodolist" class="addBtn">${varButton[3]}</span>
+                            <span id="accSettingsBtn" class="accSettingsBtn">${varButton[4]}</span>
+                            <span id="logOutBtn" class="logOutBtn">${varButton[5]}</span>
                         </div><br>
 
                         <ul id="todolistsul">
@@ -133,16 +139,16 @@ function createHtml(stage){
                         <div id="todoDIV" class="header-dash">
                             <h3 id="h3-listname" style="margin:5px">My To Do List Name Here</h3>
                             <input class="input-dash" type="text" id="newListItemInput" placeholder="Enter new list item ...">
-                            <span id="newlistitem" class="addBtn">Add</span>
-                            <span id="accSettingsBtn" class="accSettingsBtn">Account Settings</span>
-                            <span id="logOutBtn" class="logOutBtn">Log Out</span>
+                            <span id="newlistitem" class="addBtn">${varButton[3]}</span>
+                            <span id="accSettingsBtn" class="accSettingsBtn">${varButton[4]}</span>
+                            <span id="logOutBtn" class="logOutBtn">${varButton[5]}</span>
                         </div><br>
 
                         <ul id="todolistul">
                         </ul>
                     <br>
                     <div>
-                        <button id="backsavelist" type="button" class="button">Back</button>
+                        <button id="backsavelist" type="button" class="button">${varButton[2]}</button>
                     </div>
                 </form>
 
@@ -172,8 +178,8 @@ function createHtml(stage){
                     <input type="password" id="asrepassword" name="password" size="30"><br><br>               
                     
                     <div>
-                        <button id="accsettingssave" type="button" class="button">Save</button>
-                        <button id="accsettingscancel" type="button" class="button">Cancel</button>
+                        <button id="accsettingssave" type="button" class="button">${varButton[6]}</button>
+                        <button id="accsettingscancel" type="button" class="button">${varButton[7]}</button>
                     </div>
 
                 </form>

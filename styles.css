@@ -13,7 +13,7 @@ body{
 }
 
 h1 {
-  color: white;
+  color: rebeccapurple;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
@@ -129,6 +129,9 @@ ul li {
   background: #ffb;
   font-size: 18px;
   transition: 0.2s;
+
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: lighter;
   
   /* make the list items unselectable */
   -webkit-user-select: none;
@@ -188,8 +191,11 @@ border-radius: 5px;
   border-radius: 10px;
   background-color: #66ffb0;
   padding: 10px 10px;
-  color: red;
+  color: rebeccapurple;
   text-align: center;
+
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: lighter;
 }
 
 /* Clear floats after the header */
@@ -209,6 +215,9 @@ border-radius: 5px;
   padding: 5px;
   float: left;
   font-size: 16px;
+  
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: lighter;
 }
 .input-dash-100 {
 
@@ -227,13 +236,16 @@ border-radius: 5px;
   padding: 5px;
   width: 15%;
   background: #d9d9d9;
-  color: #555;
+  color: rebeccapurple;
   float: left;
   text-align: center;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
   border-radius: 10px;
+  
+  font-family: 'Courier New', Courier, monospace;
+  font-weight:bold ;
 }
 
 /* Style the "Account Settings" button */
@@ -242,13 +254,16 @@ border-radius: 5px;
   padding: 5px;
   width: 60%;
   background: #d9d9d9;
-  color: #555;
+  color: rebeccapurple;
   float: left;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
   transition: 0.3s;
   border-radius: 10px;
+  
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
 /* Style the "Log Out" button */
@@ -257,13 +272,16 @@ border-radius: 5px;
   padding: 5px;
   width: 40%;
   background: #d9d9d9;
-  color: #555;
+  color: rebeccapurple;
   float: left;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
   transition: 0.3s;
   border-radius: 10px;
+  
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
 .addBtn:hover ,
