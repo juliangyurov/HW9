@@ -10,66 +10,17 @@ let lutodolists = [];
 //back or savelist status for button on Todo form
 let backsavelist = true; // true -> back button , false -> savelist button
 
-// function changeStage()  {
-//     switch(stage){
-//         case 0:
-//             firstForm.style.display="block";
-//             signUpForm.style.display="none";
-//             logInForm.style.display="none";
-//             dashboardForm.style.display="none";
-//             toDoForm.style.display="none";
-//             accSettingsForm.style.display="none";
-//             break;
-//         case 1:
-//             firstForm.style.display="none";
-//             signUpForm.style.display="block";
-//             logInForm.style.display="none";
-//             dashboardForm.style.display="none";
-//             toDoForm.style.display="none";
-//             accSettingsForm.style.display="none";
-//             break;
-//         case 2:
-//             firstForm.style.display="none";
-//             signUpForm.style.display="none";
-//             logInForm.style.display="block";
-//             dashboardForm.style.display="none";
-//             toDoForm.style.display="none";
-//             accSettingsForm.style.display="none";
-//             break;            
-//         case 3:
-//             firstForm.style.display="none";
-//             signUpForm.style.display="none";
-//             logInForm.style.display="none";
-//             dashboardForm.style.display="block";
-//             toDoForm.style.display="none";
-//             accSettingsForm.style.display="none";
-//             break;
-//         case 4:
-//             firstForm.style.display="none";
-//             signUpForm.style.display="none";
-//             logInForm.style.display="none";
-//             dashboardForm.style.display="none";
-//             toDoForm.style.display="block";
-//             accSettingsForm.style.display="none";
-//             break; 
-//         case 5:
-//                 firstForm.style.display="none";
-//                 signUpForm.style.display="none";
-//                 logInForm.style.display="none";
-//                 dashboardForm.style.display="none";
-//                 toDoForm.style.display="none";
-//                 accSettingsForm.style.display="block";
-//                 break;                                 
-//         default:
-//             firstForm.style.display="block";
-//             signUpForm.style.display="none";
-//             logInForm.style.display="none";
-//             dashboardForm.style.display="none";
-//             toDoForm.style.display="none";  
-//             accSettingsForm.style.display="none";      
-//     }
-//     console.log("stage = " + stageName[stage]);
-// }
+// H2 - template literal variables 
+let varH2 = ["list of things that need to get done","Please complete all information below:","Please complete all information below:",
+"DASHBOARD - Please choose existing or create new to-do list below:","TO-DO List:","Account Settings:"];
+
+// 0 - list of things that need to get done
+// 1,2 - Please complete all information below:
+// 3 - DASHBOARD - Please choose existing or create new to-do list below:
+// 4 - TO-DO List:
+// 5 - Account Settings:
+
+let varASLabel = ["First name:","Last name:","Email:","Password:","ReEnter Password:"];
 
 // Init
 createHtml(stage);
@@ -78,7 +29,7 @@ function createHtml(stage){
     // create body elements
     var headingHtml = (`
     <h1>TO-DO LIST MAGUS</h1>
-    <h2>list of things that need to get done</h2>
+    <h2>${varH2[0]}</h2>
 
     <p class="p-hidden"></p>
 
@@ -101,7 +52,7 @@ function createHtml(stage){
         mainHtml = (`
             <div id="signup-form" style="display: block;">
                 <form >
-                    <h2 id="headerSignUp">Please complete all information below:</h2>
+                    <h2 id="headerSignUp">${varH2[stage]}</h2>
                     <br>
 
                     <label for="fname">First name:</label><br>              
@@ -130,7 +81,7 @@ function createHtml(stage){
         mainHtml = (`
             <div id="login-form" style="display: block;">
                 <form >
-                    <h2 id="headerLogin" >Please complete all information below:</h2>
+                    <h2 id="headerLogin" >${varH2[stage]}</h2>
                     <br>
                     
                     <label for="email1">Email:</label><br>                              
@@ -152,7 +103,7 @@ function createHtml(stage){
         mainHtml = (`
             <div id="dashboard-form" style="display: block;">
                 <form >
-                    <h2>DASHBOARD - Please choose existing or create new to-do list below:</h2>
+                    <h2>${varH2[stage]}</h2>
                     <br>
 
                         <div id="myDIV" class="header-dash">
@@ -176,7 +127,7 @@ function createHtml(stage){
         mainHtml = (`
             <div id="todo-form" style="display: block;">
                 <form >
-                    <h2>TO-DO List:</h2>
+                    <h2>${varH2[stage]}</h2>
                     <br>
 
                         <div id="todoDIV" class="header-dash">
@@ -202,22 +153,22 @@ function createHtml(stage){
         mainHtml = (`
             <div id="account-settings-form" style="display: block;">
                 <form >
-                    <h2 id="headerAccSettings">Account Settings:</h2>
+                    <h2 id="headerAccSettings">${varH2[stage]}</h2>
                     <br>
 
-                    <label for="asfname">First name:</label><br>              
+                    <label for="asfname">${varASLabel[0]}</label><br>              
                     <input type="text" id="asfname" name="fname" size="30"><br><br>
                     
-                    <label for="aslname">Last name:</label><br>
+                    <label for="aslname">${varASLabel[1]}</label><br>
                     <input type="text" id="aslname" name="lname" size="30"><br><br>
                     
-                    <label for="asemail">Email:</label><br>                              
+                    <label for="asemail">${varASLabel[2]}</label><br>                              
                     <input type="text" id="asemail" name="email" size="30"><br><br>
                     
-                    <label for="aspassword">Password:</label><br>
+                    <label for="aspassword">${varASLabel[3]}</label><br>
                     <input type="password" id="aspassword" name="password" size="30"><br><br>
                     
-                    <label for="asrepassword">ReEnter Password:</label><br>
+                    <label for="asrepassword">${varASLabel[4]}</label><br>
                     <input type="password" id="asrepassword" name="password" size="30"><br><br>               
                     
                     <div>
