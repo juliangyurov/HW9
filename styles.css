@@ -124,7 +124,7 @@ ul li {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
-  padding: 12px 8px 12px 40px;
+  padding: 2px 5px 2px 5px;
   list-style-type: none;
   background: #ffb;
   font-size: 18px;
@@ -161,7 +161,7 @@ ul li.checked::before {
   border-color: #fff;
   border-style: solid;
   border-width: 0 2px 2px 0;
-  top: 10px;
+  top: 0px;
   left: 16px;
   transform: rotate(45deg);
   height: 15px;
@@ -206,7 +206,7 @@ border-radius: 5px;
   border: solid 1px black;
   border-radius: 10px;
   width: 85%;
-  padding: 10px;
+  padding: 5px;
   float: left;
   font-size: 16px;
 }
@@ -224,7 +224,7 @@ border-radius: 5px;
 /* Style the "Add" button */
 .addBtn {
   border: solid 1px black;
-  padding: 10px;
+  padding: 5px;
   width: 15%;
   background: #d9d9d9;
   color: #555;
@@ -239,7 +239,7 @@ border-radius: 5px;
 /* Style the "Account Settings" button */
 .accSettingsBtn {
   border: solid 1px black;
-  padding: 10px;
+  padding: 5px;
   width: 60%;
   background: #d9d9d9;
   color: #555;
@@ -254,7 +254,7 @@ border-radius: 5px;
 /* Style the "Log Out" button */
 .logOutBtn {
   border: solid 1px black;
-  padding: 10px;
+  padding: 5px;
   width: 40%;
   background: #d9d9d9;
   color: #555;
